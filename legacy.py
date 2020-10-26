@@ -2,25 +2,114 @@ import subprocess
 import random
 import time
 import sys
-from copy import deepcopy
 from termcolor import colored
 from pyfiglet import figlet_format
-from Gladiators import Gladiators_Lict
-from Weapons import Weapons_Lict
 
 
 class codeImmersivesBrawl():
     def __init__(self):
-        self.gladiators = deepcopy(Gladiators_Lict().gladiators)
-        self.weapons = deepcopy(Weapons_Lict().weapons)
+        # self.stats = {'health': 100, "damage": 100, "weapon": "1 Stack"}
+        self.weapons = [{
+            'name': "Tire Iron",
+            'damage': 15,
+            'chance': 4
+        }, {
+            'name': "Bag of Rocks",
+            'damage': 5,
+            'chance': 3
+        }, {
+            'name': "Rotten Flopping Fish",
+            'damage': 40,
+            'chance': 10
+        }, {
+            'name': "Halberd",
+            'damage': 20,
+            'chance': 6
+        }, {
+            'name': "Tronald Dump",
+            'damage': 5,
+            'chance': 1
+        }, {
+            'name': "Flock of Pidgeons",
+            'damage': 30,
+            'chance': 10
+        }]
 
-    # def __str__(self):
-    #     return str(self.gladiator)
-
-
-# mike = codeImmersivesBrawl()
-# print(len(mike.gladiator))
-
+        self.gladiators = [
+            {
+                'name': "Daniel The Destroyer",
+                'health': 100,
+                "damage": 20,
+                "chance": 7,
+                "weapon": {'name': "Battle Axe", "durability": 20}, "potions": {}
+            },
+            {
+                'name': "Xiao the Blade Maiden",
+                'health': 100,
+                "damage": 10,
+                "chance": 5,
+                "weapon": {'name': "Karambit Knives", "durability": 30}, "potions": {}
+            },
+            {
+                'name': "Hector Buck Shot Blaster",
+                'health': 100,
+                "damage": 30,
+                "chance": 10,
+                "weapon": {'name': "Shot Gun", "durability": 10}, "potions": {}
+            },
+            {
+                'name': "Andrea Hidden Hands",
+                'health': 100,
+                "damage": 7,
+                "chance": 4,
+                "weapon": {'name': "ButterFly Knife", "durability": 30}, "potions": {}
+            },
+            {
+                'name': "Javelin John",
+                'health': 100,
+                "damage": 25,
+                "chance": 12,
+                "weapon": {'name': "Javelin", "durability": 4}, "potions": {}
+            },
+            {
+                'name': "Sung the Gunslinger",
+                'health': 100,
+                "damage": 10,
+                "chance": 3,
+                "weapon": {'name': "Colt 45", "durability": 10}, "potions": {}
+            },
+            {
+                'name': "David Double Fist",
+                'health': 100,
+                "damage": 30,
+                "chance": 15,
+                "weapon": {'name': "Electric Brass Knuckles", "durability": 15}, "potions": {}
+            },
+            {
+                'name': "Rashaan the Wretched ",
+                'health': 100,
+                "damage": 5,
+                "chance": 1,
+                "weapon": {'name': "Flame Thrower", "durability": 50},
+                "potions": {}
+            },
+            {
+                'name': "Nikolay the NightShade",
+                'health': 100,
+                "damage": 10,
+                "chance": 4,
+                "weapon": {'name': "Whispering Needles", "durability": 45},
+                "potions": {}
+            },
+            {
+                'name': "Rainer the Razor",
+                'health': 100,
+                "damage": 15,
+                "chance": 4,
+                "weapon": {'name': "Karambit Knives", "durability": 40},
+                "potions": {}
+            },
+        ]
 
     def startBattle(self):
 
@@ -77,24 +166,14 @@ class codeImmersivesBrawl():
             print(count, self.gladiators[name]['name'])
             count += 1
         gladiator = int(input("\nChoose your Gladiator ! : "))
+        self.clear()
         champion = self.gladiators[gladiator]
-        self.clear()
-
-        count = 0
-        for name in range(len(self.weapons)):
-            print(count, self.weapons[name]['name'])
-            count += 1
-        weapon = int(input("\nChoose your Weapon ! :"))
-        champion['weapon'] = self.weapons[weapon]
-        champion['loot'] = 20
-
-        self.clear()
 
         print(
-            " Your Champion : {}\n -------------------\n Health: {} \n Weapon : {} \n -- Damage : {} \n -- Durability: {} \n Potions: {} \n Loot: {}"
-            .format(champion['name'], champion['health'], champion['weapon']['name'],
-                    champion['weapon']['damage'], champion['weapon']['durability'], champion['potions'], champion['loot']))
-        time.sleep(7)
+            " Your Champion : {}\n -------------------\n Health: {} \n Damage : {} \n chance: {}\n Weapon : {}"
+            .format(champion['name'], champion['health'], champion['damage'],
+                    champion['chance'], champion['weapon']))
+        time.sleep(3)
         self.clear()
         print("The Veteran gladiator ", colored('THOO', 'yellow'))
         time.sleep(1)
@@ -102,6 +181,7 @@ class codeImmersivesBrawl():
             "Has graced your champion 20 gold to use for battle costs, spend it wisely ...."
         )
         time.sleep(3)
+        champion['loot'] = 20
         self.clear()
         battleStart = True
         while battleStart:
